@@ -53,6 +53,16 @@ class Maven30ArtifactResolver
         this.repositorySystem = repositorySystem;
         this.aetherRepositories = aetherRepositories;
         this.session = session;
+		System.err.println("MavenArtifactResolver class: " + this.getClass().getName());
+		System.err.println("repositorySystem class: " + this.repositorySystem.getClass().getName());
+		System.err.println("session class: " + this.session.getClass().getName());
+		System.err.println("aether repositories:");
+		for (RemoteRepository rr : aetherRepositories) {
+			System.err.print("\tid: ");
+			System.err.print(rr.getId());
+			System.err.print("  , url: ");
+			System.err.println(rr.getUrl());
+		}
     }
 
     @Override
