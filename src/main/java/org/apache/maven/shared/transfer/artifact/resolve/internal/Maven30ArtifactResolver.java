@@ -56,13 +56,13 @@ class Maven30ArtifactResolver
 		System.err.println("MavenArtifactResolver class: " + this.getClass().getName());
 		System.err.println("repositorySystem class: " + this.repositorySystem.getClass().getName());
 		System.err.println("session class: " + this.session.getClass().getName());
-		System.err.println("aether repositories:");
-		for (RemoteRepository rr : aetherRepositories) {
-			System.err.print("\tid: ");
-			System.err.print(rr.getId());
-			System.err.print("  , url: ");
-			System.err.println(rr.getUrl());
-		}
+//		System.err.println("aether repositories:");
+//		for (RemoteRepository rr : aetherRepositories) {
+//			System.err.print("\tid: ");
+//			System.err.print(rr.getId());
+//			System.err.print("  , url: ");
+//			System.err.println(rr.getUrl());
+//		}
     }
 
     @Override
@@ -105,6 +105,16 @@ class Maven30ArtifactResolver
                 repositorySystem.readArtifactDescriptor( session, descriptorRequest );
 
             ArtifactRequest request = new ArtifactRequest( descriptorResult.getArtifact(), aetherRepositories, null );
+
+			System.err.println("Resolving the artifact " + request.getArtifact().getGroupId() + ":"
+				+ request.getArtifact().getArtifactId() + ":" + request.getArtifact().getVersion() + ":"
+				+ request.getArtifact().getExtension() + " via the following repositories");
+			for (RemoteRepository rr : request.getRepositories()) {
+				System.err.print("\tid: ");
+				System.err.print(rr.getId());
+				System.err.print("  , url: ");
+				System.err.println(rr.getUrl());
+			}
 
             return new Maven30ArtifactResult( repositorySystem.resolveArtifact( session, request ) );
         }
